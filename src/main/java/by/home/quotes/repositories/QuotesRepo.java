@@ -4,4 +4,7 @@ import by.home.quotes.domain.Quote;
 import org.springframework.data.repository.CrudRepository;
 
 public interface QuotesRepo extends CrudRepository<Quote, Long> {
+
+    Iterable<Quote> findByTag(String tag);
+
 }

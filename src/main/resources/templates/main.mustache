@@ -1,5 +1,33 @@
 <html>
 <body>
-    {{some}}
+    <div>
+        <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+    <div>
+        <form method="post">
+            <input type="text", name="text", placeholder="Введите цитату" />
+            <input type="text", name="tag", placeholder="Введите tag" />
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+            <button type="submit">Добавить</button>
+        </form>
+    </div>
+    <div>
+        <form method="post", action="filter">
+            <input type="text", name="tag" placeholder="Поиск по tag"/>
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+            <button type="submit">Поиск</button>
+        </form>
+    </div>
+    <dev>Список цитат</dev>
+    {{#quotes}}
+        <div>
+            <b>{{id}}</b>
+            <span>{{text}}</span>
+            <i>{{tag}}</i>
+        </div>
+    {{/quotes}}
 </body>
 </html>

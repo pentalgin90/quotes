@@ -12,7 +12,16 @@ public class Quote {
     private Long id;
 
     private String text;
-    private String teg;
+
+    public Quote() {
+    }
+
+    public Quote(String text, String tag) {
+        this.text = text;
+        this.tag = tag;
+    }
+
+    private String tag;
 
     public Long getId() {
         return id;
@@ -30,11 +39,11 @@ public class Quote {
         this.text = text;
     }
 
-    public String getTeg() {
-        return teg;
+    public String getTag() {
+        return tag;
     }
 
-    public void setTeg(String teg) {
-        this.teg = teg;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }
