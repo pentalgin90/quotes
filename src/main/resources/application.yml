@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: @project.name@
+    formattedVersion: (v@project.version@)
+  datasource:
+    username: admin
+    password: Meg~7+inO
+    url: jdbc:postgresql://localhost:5432/quotes
+  jpa:
+    generate-ddl: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+    hibernate:
+      ddl-auto: update
+  freemarker:
+    expose-request-attributes: true
+  mail:
+    host: smtp.gmail.com
+    username: quotesfromdb@gmail.com
+    password: 1fWEikNBV*yxZZq
+    port: 465
+    protocol: smtps
+server:
+  port: 8080
+
+upload:
+  path: /quotes/uploads
+
+mail:
+  debug: false
