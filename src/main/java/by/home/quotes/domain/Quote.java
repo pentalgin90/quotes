@@ -1,9 +1,6 @@
 package by.home.quotes.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Quote {
@@ -13,12 +10,23 @@ public class Quote {
 
     private String text;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User author;
+
+    private String filename;
+
     public Quote() {
     }
 
-    public Quote(String text, String tag) {
+    public Quote(String text, String tag, User user) {
         this.text = text;
         this.tag = tag;
+        this.author = user;
+    }
+
+    public String authorName(){
+        return author != null ? author.getUsername() : "<none>";
     }
 
     private String tag;
@@ -45,5 +53,21 @@ public class Quote {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }
