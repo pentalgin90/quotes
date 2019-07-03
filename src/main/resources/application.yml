@@ -14,7 +14,7 @@ spring:
         temp:
           use_jdbc_metadata_defaults: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
   freemarker:
     expose-request-attributes: true
   mail:
