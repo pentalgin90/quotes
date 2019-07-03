@@ -1,7 +1,7 @@
 spring:
   application:
-    name: @project.name@
-    formattedVersion: (v@project.version@)
+    name: quotes
+    formattedVersion: 1.0.0
   datasource:
     username: admin
     password: Meg~7+inO
@@ -14,7 +14,7 @@ spring:
         temp:
           use_jdbc_metadata_defaults: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
   freemarker:
     expose-request-attributes: true
   mail:
