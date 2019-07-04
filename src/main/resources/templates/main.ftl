@@ -41,7 +41,7 @@
             </#if>
             <div class="m-2">
                 <span>${quote.text}</span>
-                <i>${quote.tag}</i>
+                <i><a href="/?tag=${quote.tag}">#${quote.tag}</a></i>
             </div>
             <div class="card-footer text-muted">
                 ${quote.authorName()}
