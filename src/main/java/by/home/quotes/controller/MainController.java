@@ -29,11 +29,11 @@ public class MainController {
         this.serviceQuote = serviceQuote;
     }
 
-    @GetMapping("/")
+    @GetMapping("/main")
     public String greeting() {
         return "greeting";
     }
-    @GetMapping("/main")
+    @GetMapping("/")
     public String main(Model model,
                        @RequestParam(required = false, defaultValue = "") String tag){
         Iterable<Quote> quotes = serviceQuote.findByTag(tag);
@@ -42,7 +42,7 @@ public class MainController {
         return "main";
     }
 
-    @PostMapping("/main")
+    @PostMapping("/")
     public String addQuotes(
             @AuthenticationPrincipal User user,
             @RequestParam String text,
