@@ -5,6 +5,7 @@ import by.home.quotes.domain.User;
 import by.home.quotes.repositories.UserRepo;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -15,10 +16,12 @@ import java.util.stream.Collectors;
 public class ServiceUserImpl implements ServiceUser {
     private final UserRepo userRepo;
     private final MailSender mailSender;
+    private final PasswordEncoder passwordEncoder;
 
-    public ServiceUserImpl(UserRepo userRepo, MailSender mailSender){
+    public ServiceUserImpl(UserRepo userRepo, MailSender mailSender, PasswordEncoder passwordEncoder){
         this.userRepo = userRepo;
         this.mailSender = mailSender;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -45,7 +48,11 @@ public class ServiceUserImpl implements ServiceUser {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepo.findByUsername(username);
+        User user = userRepo.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user;
     }
 
     public List<User> getUserAll() {
@@ -61,6 +68,7 @@ public class ServiceUserImpl implements ServiceUser {
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         user.setActivationCode(UUID.randomUUID().toString());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
 
         sendMessage(user);
@@ -72,7 +80,7 @@ public class ServiceUserImpl implements ServiceUser {
         if(!user.getEmail().isEmpty()){
             String message = String.format(
                     "Hello, %s! \n" +
-                            "Welcom to Quotes. Please, visit next link: https://heroku-localmems.herokuapp.com/activate/%s",
+                            "Welcom to Quotes. Please, visit next link: http://localhost:8080/activate/%s",
                     user.getUsername(),
                     user.getActivationCode()
             );
