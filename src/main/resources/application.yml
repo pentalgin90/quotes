@@ -7,15 +7,14 @@ spring:
     password: Meg~7+inO
     url: jdbc:postgresql://localhost:5432/quotes
   jpa:
-    generate-ddl: false
+    generate-ddl: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         temp:
           use_jdbc_metadata_defaults: false
     hibernate:
-      ddl-auto: validate
-    show-sql: false
+      ddl-auto: update
   freemarker:
     expose-request-attributes: true
   mail:
