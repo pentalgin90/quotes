@@ -1,6 +1,9 @@
 package by.home.quotes.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Quote {
@@ -8,6 +11,8 @@ public class Quote {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Please fill the quote")
+    @Length(max = 2048, message = "Quote to long (more than 2kB)")
     private String text;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -28,7 +33,8 @@ public class Quote {
     public String authorName(){
         return author != null ? author.getUsername() : "<none>";
     }
-
+    @NotBlank(message = "Please fill the quote")
+    @Length(max = 255, message = "Tag to long (more than 255)")
     private String tag;
 
     public Long getId() {

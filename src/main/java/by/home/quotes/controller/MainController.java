@@ -7,15 +7,20 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
@@ -45,30 +50,44 @@ public class MainController {
     @PostMapping("/")
     public String addQuotes(
             @AuthenticationPrincipal User user,
-            @RequestParam String text,
-            @RequestParam String tag,
-            @RequestParam("file") MultipartFile file,
-            Map<String, Object> model
+            @Valid Quote quote,
+            BindingResult bindingResult,
+            Model model,
+            @RequestParam("file") MultipartFile file
     ) throws IOException {
-        Quote quote = new Quote(text, tag, user);
+        quote.setAuthor(user);
 
-        if(file != null && !file.getOriginalFilename().isEmpty()){
-            File uploadDir = new File(uploadPath);
+        if(bindingResult.hasErrors()){
 
-            if(!uploadDir.exists()){
-                uploadDir.mkdir();
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
+            model.mergeAttributes(errorsMap);
+            model.addAttribute("quote", quote);
+
+        } else {
+
+            if(file != null && !file.getOriginalFilename().isEmpty()){
+                File uploadDir = new File(uploadPath);
+
+                if(!uploadDir.exists()){
+                    uploadDir.mkdir();
+                }
+
+                String uuidFile = UUID.randomUUID().toString();
+                String resultFileName = uuidFile + "." + file.getOriginalFilename();
+
+                file.transferTo(new File(uploadPath + "/" + resultFileName));
+
+                quote.setFilename(resultFileName);
             }
 
-            String uuidFile = UUID.randomUUID().toString();
-            String resultFileName = uuidFile + "." + file.getOriginalFilename();
+            model.addAttribute("quote", null);
 
-            file.transferTo(new File(uploadPath + "/" + resultFileName));
+            serviceQuote.save(quote);
 
-            quote.setFilename(resultFileName);
         }
-        serviceQuote.save(quote);
         Iterable<Quote> quotes = serviceQuote.getAll();
-        model.put("quotes", quotes);
+        model.addAttribute("quotes", quotes);
         return "main";
     }
+
 }
