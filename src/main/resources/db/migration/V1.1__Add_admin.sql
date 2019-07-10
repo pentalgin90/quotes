@@ -1,4 +1,4 @@
-insert into usr (id, activation_code, active, email, password, username)
+insert into public.usr (id, activation_code, active, email, password, username)
     values (1, null, true, null, 'Meg~7+inO', 'admin'),
            (2,	null,	true,	'dmitrii.bragin90@gmail.com', '1fWEikNBV*yxZZq',	'pentalgin'),
            (3, null, true, 'kotelnikovartem@mail.ru', 'фысойц', 'Фысойц'),
@@ -7,7 +7,7 @@ insert into usr (id, activation_code, active, email, password, username)
            (6, null, true, 'valerasura4@gmail.com', 'ashotcumshot', 'Ashot');
 
 
-insert into user_role(user_id, roles)
+insert into public.user_role(user_id, roles)
     values (1, 'USER'),
            (1, 'ADMIN'),
            (2, 'USER'),
@@ -16,7 +16,7 @@ insert into user_role(user_id, roles)
            (5, 'USER'),
            (6, 'USER');
 
-insert into quote (id, filename, tag, text, user_id)
+insert into public.quote (id, filename, tag, text, user_id)
     values
         (2,	null,	'Тараскин',	'"Главное рулем не крути"',	2),
         (3,	null,	'Брагин',	'"Всегда заставал его в настроение игривое распиздяйство"',	2),
