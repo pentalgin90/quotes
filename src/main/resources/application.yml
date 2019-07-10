@@ -7,7 +7,7 @@ spring:
     password: Meg~7+inO
     url: jdbc:postgresql://localhost:5432/quotes
   jpa:
-    generate-ddl: true
+    generate-ddl: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
