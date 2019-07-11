@@ -3,6 +3,7 @@ package by.home.quotes.service;
 import by.home.quotes.domain.Role;
 import by.home.quotes.domain.User;
 import by.home.quotes.repositories.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,15 +15,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class ServiceUserImpl implements ServiceUser {
-    private final UserRepo userRepo;
-    private final MailSender mailSender;
-    private final PasswordEncoder passwordEncoder;
-
-    public ServiceUserImpl(UserRepo userRepo, MailSender mailSender, PasswordEncoder passwordEncoder){
-        this.userRepo = userRepo;
-        this.mailSender = mailSender;
-        this.passwordEncoder = passwordEncoder;
-    }
+    @Autowired
+    private UserRepo userRepo;
+    @Autowired
+    private MailSender mailSender;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User getUsername(String username) {
