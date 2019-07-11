@@ -16,15 +16,6 @@ configurations {
     }
 }
 
-task myTask(type:Exec) {
-
-    workingDir '.'
-
-    commandLine 'gradle flywayMigrate -Dflyway.url=${spring.datasource.url}' +
-            ' -Dflyway.user=${spring.datasource.username} -Dflyway.password=${spring.datasource.password}'
-
-}
-
 repositories {
     mavenCentral()
 }
