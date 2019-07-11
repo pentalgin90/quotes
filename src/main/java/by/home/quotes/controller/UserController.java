@@ -3,6 +3,7 @@ package by.home.quotes.controller;
 import by.home.quotes.domain.Role;
 import by.home.quotes.domain.User;
 import by.home.quotes.service.ServiceUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -14,12 +15,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
-    private final ServiceUser serviceUser;
-
-    public UserController(ServiceUser serviceUser){
-        this.serviceUser = serviceUser;
-    }
+    @Autowired
+    private ServiceUser serviceUser;
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping

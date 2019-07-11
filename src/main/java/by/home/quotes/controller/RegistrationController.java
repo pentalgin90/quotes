@@ -2,6 +2,7 @@ package by.home.quotes.controller;
 
 import by.home.quotes.domain.User;
 import by.home.quotes.service.ServiceUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -16,11 +17,8 @@ import java.util.Map;
 
 @Controller
 public class RegistrationController {
-    private final ServiceUser serviceUser;
-
-    public RegistrationController(ServiceUser serviceUser){
-        this.serviceUser = serviceUser;
-    }
+    @Autowired
+    private ServiceUser serviceUser;
 
     @GetMapping("/registration")
     public String getRegistration(){
