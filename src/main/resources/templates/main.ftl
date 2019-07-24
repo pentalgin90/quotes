@@ -4,7 +4,7 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <form method="get" action="/" class="form-inline">
-                <input type="text" name="tag" class="form-control" value="${tag?ifExists}" placeholder="Search by tag" />
+                <input type="text" name="tag" class="form-control" value="${tag?ifExists}" placeholder="Search by tag">
                 <button type="submit" class="btn btn-primary ml-2">Search</button>
             </form>
         </div>
@@ -35,7 +35,7 @@
                     </#if>
                 </div>
                 <div class="custom-file">
-                    <input type="file" name="file" id="customFile" />
+                    <input type="file" name="file" id="customFile">
                     <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
@@ -45,7 +45,7 @@
             </form>
         </div>
     </div>
-    <div class="card-columns" id="quotes-list">
+    <div class="card-columns">
     <#list quotes as quote>
         <div class="card my-3">
             <#if quote.filename??>
