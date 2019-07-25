@@ -30,6 +30,9 @@ dependencies {
     // https://mvnrepository.com/artifact/org.postgresql/postgresql
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.6'
     compile 'org.springframework.boot:spring-boot-starter-security'
+    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-test
+    testCompile group: 'org.springframework.security', name: 'spring-security-test'
+    compile 'org.springframework.boot:spring-boot-starter-test'
     compile group: 'org.flywaydb', name: 'flyway-core', version: '5.2.4'
 
 
