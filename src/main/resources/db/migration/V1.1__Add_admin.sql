@@ -26,3 +26,4 @@ insert into public.quote (id, filename, tag, text, user_id)
         (7,	null,	'Женя',	'"Когда ей грустно и одиноко, она достаёт из-за торшера..."',	5),
         (8,	null,	'Брагин',	'"Логичные вещи"',	6),
         (9,	null,	'Дамир-пломбир',	'"Кирпичный стеноклад"',	6);
+alter sequence hibernate_sequence restart with 10;
