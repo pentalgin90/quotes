@@ -78,7 +78,7 @@ public class ServiceUserImpl implements ServiceUser {
         if(!user.getEmail().isEmpty()){
             String message = String.format(
                     "Hello, %s! \n" +
-                            "Welcom to Quotes. Please, visit next link: https://heroku-localmems.herokuapp.com/activate/%s",
+                            "Welcom to Quotes. Please, visit next link: http://ec2-35-182-228-141.ca-central-1.compute.amazonaws.com/activate/%s",
                     user.getUsername(),
                     user.getActivationCode()
             );
