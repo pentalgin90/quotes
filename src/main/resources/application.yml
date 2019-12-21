@@ -5,7 +5,7 @@ spring:
   datasource:
     username: admin
     password: Meg~7+inO
-    url: jdbc:postgresql://${POSTGRES_HOST}:5000/quotes
+    url: jdbc:postgresql://${POSTGRES_HOST}:5432/quotes
   jpa:
     generate-ddl: false
     properties:
@@ -21,7 +21,7 @@ spring:
   mail:
     host: smtp.gmail.com
     username: quotesfromdb@gmail.com
-    password: 1fWEikNBV*yxZZq
+    password: 
     port: 465
     protocol: smtps
 server:
